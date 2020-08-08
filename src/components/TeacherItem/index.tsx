@@ -37,29 +37,27 @@ const TeacherItem: React.FC<TeacherItemProps> = ({ teacher, favorited }) => {
   async function handleToggleFavorite() {
     const favorites = await AsyncStorage.getItem('favorites');
     
-    let favoritesArray: Array<number> = []; 
+    let favoritesArray = []; 
 
     if (favorites) {
       favoritesArray = JSON.parse(favorites);
     }
     
     if (isFavorited) {
-      const favoriteIndex = favoritesArray.findIndex((teacherId: number) => {
-        return teacherId === teacher.id
+      const favoriteIndex = favoritesArray.findIndex((teacherItem: Teacher) => {
+        return teacherItem.id === teacher.id
       });
 
       favoritesArray.splice(favoriteIndex, 1);
 
       setIsFavorited(false);
-
-      await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray));
     } else {
-      favoritesArray.push(teacher.id);
+      favoritesArray.push(teacher);
       
-      setIsFavorited(true);
-      
-      await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray));
+      setIsFavorited(true);  
     }
+
+    await AsyncStorage.setItem('favorites', JSON.stringify(favoritesArray));
   }
 
   function linkToWhatssap() {
