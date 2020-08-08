@@ -26,11 +26,6 @@ function TeacherList() {
       if (response) {
         const favoritedTeachers = JSON.parse(response);
 
-        
-        console.log("!!!!! favorited teacher's id !!!!!")
-        console.log(favoritedTeachers)
-        console.log("")
-
         setFavorites(favoritedTeachers);
       }
     })
