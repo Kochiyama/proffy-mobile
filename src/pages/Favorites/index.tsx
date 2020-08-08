@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, ScrollView, AsyncStorage } from 'react-native';
-
-import api from '../../services/api';
+import { useFocusEffect } from '@react-navigation/native';
 
 import PageHeader from '../../components/PageHeader';
 import TeacherItem, { Teacher } from '../../components/TeacherItem';
@@ -10,35 +9,22 @@ import styles from './styles';
 
 function Favorites() {
   const [favorites, setFavorites] = useState([]);
-  const [pages, setPages] = useState(0);
-  const [teachers, setTeachers] = useState([]);
 
-  function loadFavorites() {
-    AsyncStorage.getItem('favorites').then(response => {
+  async function loadFavorites() {
+    await AsyncStorage.getItem('favorites').then(response => {
       if (response) {
         const favoritedTeachers = JSON.parse(response);
+        const favoritedTeacherIds = favoritedTeachers.map((teacher: Teacher) => {
+          return teacher;
+        })
 
-        setFavorites(favoritedTeachers);
+        setFavorites(favoritedTeacherIds);
       }
     })
   }
 
-  async function loadFavoriteTeachers() {
-    const response = await api.get(`/classes/${pages}`);
-
-    const teachersArray = JSON.parse(response);
-
-    for (responseClass of response) {
-
-    }
-  
-    console.log(response.data[0].avatar);
-  }
-
-  useEffect(() => {
-    console.log('load')
+  useFocusEffect(() => {
     loadFavorites();
-    loadFavoriteTeachers();
   }, [])
 
   return (
@@ -57,7 +43,7 @@ function Favorites() {
             <TeacherItem 
               key={teacher.id}
               teacher={teacher}
-              favorited={favorites.includes(teacher.id)}
+              favorited={true}
             />
           );
         })}
