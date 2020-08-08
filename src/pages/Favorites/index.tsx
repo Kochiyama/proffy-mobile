@@ -25,7 +25,7 @@ function Favorites() {
 
   useFocusEffect(() => {
     loadFavorites();
-  }, [])
+  })
 
   return (
     <View style={styles.container}>
