@@ -38,7 +38,7 @@ Project initially developed at **Next Level Week #2** from @Rocketseat.
 ## Preview: Mobile
 Little visual bugs caused by screen recorder!
 
-<img style="width: 300px" src="readme-assets/preview.gif" />
+<img src="readme-assets/preview.gif" width="400px" />
 
 ---
 
@@ -127,7 +127,7 @@ scan the qr code from metro blundler
 
 done!
 
-<img style="width: 300px" src="readme-assets/connect.gif" />
+<img src="readme-assets/connect.gif" width="400px" />
 
 ---
 
